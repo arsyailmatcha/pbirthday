@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Antut</title>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Patrick Hand', cursive;
+}
+
+body{overflow:hidden;}
+
+.scene{
+height:100vh;
+width:100%;
+display:none;
+position:absolute;
+top:0;
+left:0;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:40px 20px;
+text-align:center;
+}
+
+.active{display:flex;}
+
+.bgInput{background:#cbd5e1;}
+.bgLoad{background:#dbeafe;}
+.bgSabar{background:#fef3c7;}
+.bgMedal{background:#e9d5ff;}
+.bgBirthday{background:#fde2e4;}
+.bgLetter{background:#e0f2fe;}
+.bgAffirm{background:#f0fdf4;}
+.bgFinal{background:#f8f1e9;}
+
+.bigText{
+font-size:6vw;
+max-width:900px;
+line-height:1.4;
+}
+
+input, textarea{
+margin-top:20px;
+padding:15px;
+font-size:20px;
+border-radius:12px;
+border:2px solid #333;
+background:white;
+width:80%;
+max-width:320px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+textarea{
+height:160px;
+resize:none;
+}
+
+button{
+margin-top:30px;
+padding:12px 26px;
+border:none;
+border-radius:25px;
+background:#334155;
+color:white;
+font-size:18px;
+cursor:pointer;
+display:none;
+position:relative;
+z-index:3;
+}
+
+.loader{
+width:100px;
+height:100px;
+border:10px solid #eee;
+border-top:10px solid #334155;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-top:30px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+.confetti{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(90deg,transparent 48%,rgba(255,255,255,0.3) 50%,transparent 52%);
+animation:fall 1s infinite linear;
+opacity:0.2;
+z-index:1;
+}
+
+@keyframes fall{
+0%{background-position:0 0;}
+100%{background-position:0 100px;}
+}
+
+.envelope{
+width:280px;
+height:180px;
+background:#fff;
+border:2px solid #aaa;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.letter{
+width:85%;
+height:75%;
+background:#fffaf0;
+padding:30px;
+line-height:1.8;
+background-image:linear-gradient(to bottom, transparent 39px, #e5e5e5 40px);
+background-size:100% 40px;
+display:none;
+overflow:auto;
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.finalPhoto{
+width:80%;
+max-width:400px;
+height:300px;
+border:4px dashed #888;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="scene bgInput active" id="p1">
+<div class="bigText">enter your name to access</div>
+<input id="nameInput">
+<div id="nameError" style="color:red;margin-top:10px;"></div>
+<button onclick="checkName()">next →</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="scene bgLoad" id="p2">
+<div class="bigText">loading page for special human</div>
+<div class="loader"></div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="scene bgSabar" id="p3">
+<div id="sabarText" class="bigText"></div>
+<img src="bubu.melet.gif" style="width:60vw;max-width:320px;height:auto;margin-top:20px;">
+<button onclick="nextPage(4)">next →</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="scene bgMedal" id="p4">
+<div class="confetti"></div>
+<img src="medali.gif" style="width:50vw;max-width:260px;height:auto;margin-bottom:20px;z-index:2;">
+<div id="medalText" class="bigText" style="z-index:2;"></div>
+<button onclick="nextPage(5)">next →</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="scene bgInput" id="p5">
+<div class="bigText">enter your current age</div>
+<input id="ageInput">
+<div id="ageError" style="color:red;margin-top:10px;"></div>
+<button onclick="checkAge()">next →</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="scene bgLoad" id="p6">
+<div class="bigText">loading page</div>
+<div class="loader"></div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="scene bgBirthday" id="p7" style="position:relative;overflow:hidden;">
+
+<!-- GIF BACKGROUND GRID -->
+<div style="position:absolute;top:0;left:0;width:100%;height:100%;
+display:grid;grid-template-columns:repeat(5,1fr);
+grid-template-rows:repeat(2,1fr);gap:10px;
+opacity:0.25;z-index:0;pointer-events:none;">
+
+<img src="bubudrmbn.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="dudusgift.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="dudutiuplilin.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="nlg.clap.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="nlg.slmt.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="dudubrgcke.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="dudufly.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="bubujgtt.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="bubuflwr.gif" style="width:100%;height:100%;object-fit:contain;">
+<img src="mustadd.gif" style="width:100%;height:100%;object-fit:contain;">
+</div>
+
+<div id="bdayText" class="bigText" style="position:relative;z-index:2;"></div>
+<button onclick="nextPage(8)">next →</button>
+</div>
+
+<!-- PAGE 8 -->
+<div class="scene bgInput" id="p8">
+<div class="bigText">Write your wishes for this new age.</div>
+<textarea id="wishInput"></textarea>
+<button onclick="prepareLetter()">next →</button>
+</div>
+
+<!-- PAGE 9 -->
+<div class="scene bgLetter" id="p9">
+<div class="envelope" onclick="openLetter()">click to open</div>
+<div class="letter" id="letter"></div>
+<button onclick="nextPage(10)">next →</button>
+</div>
+
+<!-- PAGE 10 -->
+<div class="scene bgAffirm" id="p10">
+<div id="affirmText" class="bigText"></div>
+<button onclick="nextPage(11)">next →</button>
+</div>
+
+<!-- PAGE 11 -->
+<div class="scene bgFinal" id="p11">
+
+  <img src="fotontut.png"
+       style="width:80%;
+              max-width:400px;
+              height:auto;
+              border-radius:20px;
+              box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+
+</div>
+
+
+<script>
+
+function slowType(text, el, cb){
+let i=0;
+let interval=setInterval(()=>{
+if(i<text.length){
+el.innerHTML+=text[i];
+i++;
+}else{
+clearInterval(interval);
+if(cb) cb();
+}
+},80);
+}
+
+function showBtn(id){
+document.querySelector("#p"+id+" button").style.display="block";
+}
+
+document.querySelector("#p1 button").style.display="block";
+document.querySelector("#p5 button").style.display="block";
+document.querySelector("#p8 button").style.display="block";
+
+function nextPage(n){
+document.querySelectorAll(".scene").forEach(s=>s.classList.remove("active"));
+document.getElementById("p"+n).classList.add("active");
+
+if(n===3){
+let el=document.getElementById("sabarText");
+el.innerHTML="";
+slowType("nungguin yaa, wkwkwk, sabarr yaaa, udah tua harus banyak sabar,hehe, bercanda ntut comel",el,()=>showBtn(3));
+}
+if(n===4){
+let el=document.getElementById("medalText");
+el.innerHTML="";
+slowType("selamat atas pencapaian pertama di usia baru ntutt, makasih telah sabar menunggu loadingan yg sengaja dibuat lama",el,()=>showBtn(4));
+}
+if(n===7){
+let el=document.getElementById("bdayText");
+el.innerHTML="";
+slowType("HAPPY BIRTHDAY ANTUTTT COMELLL",el,()=>showBtn(7));
+}
+if(n===10){
+startAffirm();
+}
+}
+
+function checkName(){
+if(document.getElementById("nameInput").value.toLowerCase()!=="antut"){
+document.getElementById("nameError").innerText="wrong name.";
+return;
+}
+nextPage(2);
+setTimeout(()=>nextPage(3),60000);
+}
+
+function checkAge(){
+if(document.getElementById("ageInput").value!=="19"){
+document.getElementById("ageError").innerText="wrong age.";
+return;
+}
+nextPage(6);
+setTimeout(()=>nextPage(7),2000);
+}
+
+function prepareLetter(){
+nextPage(9);
+}
+
+function openLetter(){
+let letter=document.getElementById("letter");
+letter.style.display="block";
+letter.innerHTML="";
+let wish=document.getElementById("wishInput").value;
+slowType(wish,letter,()=>showBtn(9));
+}
+
+function startAffirm(){
+let lines=[
+"19 looks good on you.",
+"You’re doing better than you think.",
+"And I’m proud of you.",
+"Don’t lose your light.",
+"Thank you for being you.",
+"I’m really happy you’re here."
+];
+let el=document.getElementById("affirmText");
+el.innerHTML="";
+let i=0;
+function nextLine(){
+if(i<lines.length){
+let p=document.createElement("div");
+el.appendChild(p);
+slowType(lines[i],p,()=>setTimeout(()=>{i++;nextLine();},800));
+}else{
+showBtn(10);
+}
+}
+nextLine();
+}
+
+</script>
+</body>
+</html>
